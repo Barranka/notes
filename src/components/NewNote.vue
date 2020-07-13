@@ -53,9 +53,8 @@ export default {
         titleEdit: false,
         descrEdit: false,
       }
-      console.log(selected)
-
       this.$store.dispatch('addNote', note)
+
       .then(()=> {
         this.message = null
         this.note.title = ""
@@ -63,12 +62,9 @@ export default {
         this.note.selected = "base"
       })
       .catch(e => console.log(this.message))
-
-
     }
   }
 }
-
 </script>
 
 <style lang="scss">

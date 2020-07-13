@@ -3,8 +3,6 @@
     <div class="wrapper-content">
       <section>
         <div class="container">
-          
-		     <!-- Компонент Message перенсен в NewNote-->
 
           <!-- new note -->
           <newNote />
@@ -61,7 +59,6 @@ export default {
         notes: state => state.notes.notes
     }),
 	  notesFilter () {
-            console.log(this.notes)
 		  let array = this.notes,
           search = this.search
 

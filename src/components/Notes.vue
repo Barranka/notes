@@ -8,9 +8,9 @@
         <rewriteVal
           v-if="note.titleEdit"
           :editing='editing'
-          @close="resetValuesTitle(note, 'title')"/>
+          @close="resetValues(note, 'title')"/>
 
-        <p class="note-header" v-else @dblclick="[changeVal(note.title, index), editing.values.title=true, note.titleEdit = true]">{{ note.title }}</p>
+        <p class="note-header" v-else @dblclick="[changeVal(note.title, index), editing.values.title = true, note.titleEdit = true]">{{ note.title }}</p>
         <p class="note-header_cursor" style="cursor: pointer;" @click="cancelNote(index)">x</p>
       </div>
 
@@ -19,7 +19,7 @@
         <rewriteVal
           v-if="note.descrEdit"
           :editing='editing'
-          @close="resetValuesDescr(note)"/>
+          @close="resetValues(note, 'descr')"/>
 
         <p v-else @dblclick="[changeVal(note.descr, index), editing.values.descr = true, note.descrEdit = true]">{{ note.descr }}</p>
         <span>{{ note.date }}</span>
@@ -38,7 +38,6 @@ export default {
     rewriteVal
   },
   props: {
-    // не стала брать arr из store, т.к. в App.vue фильтр
     notes: {
       type: Array,
       required: true
@@ -50,7 +49,6 @@ export default {
   },
   data() {
     return {
-      //для редакт-ия title и descr
       editing: {
         value: '',
         values: {title: false, descr: false},
@@ -60,21 +58,18 @@ export default {
   },
   methods: {
     ...mapActions([
-      'cancelNote' // использую вместо м-да ниже removeNote, в Html вызывю сразу же cancelNote
+      'cancelNote'
     ]),
-    // removeNote (index) {
-    //   this.$store.dispatch('cancelNote', index)
-    // },
     changeVal (val, index) {
       this.editing.value = val
       this.editing.index = index
     },
-    resetValuesTitle(note) {
+    resetValues(note, type) {
+      if (type == 'title')
       note.titleEdit = false
       this.editing.values.title = false
-    },
-    resetValuesDescr(note, type) {
-      if (type == 'title')
+
+      if (type == 'descr')
       note.descrEdit = false
       this.editing.values.descr = false
     }

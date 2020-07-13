@@ -51,11 +51,5 @@ export default {
 		cancelNote ({commit}, note) {
 			commit('cancelNote', note)
 		}
-	},
-	//I used methods stateMap in App.vue, this getters isn't worker
-	// getters: {
-	// 	getNotes (state) {
-	// 		return state.notes
-	// 	}
-	// }
+	}
 }

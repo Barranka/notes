@@ -21,11 +21,10 @@ export default {
   data() {
     return {
       val: this.editing.value
-    };
+    }
   },
   methods: {
     newVal () {
-      console.log(this.val)
       this.$store.dispatch("changeNote", {
         value: this.val, index: this.editing.index, valTitle: this.editing.values.title, valDescr: this.editing.values.descr
       })
