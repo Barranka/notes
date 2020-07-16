@@ -1,17 +1,17 @@
 <template>
   <div class="notes">
     <div class="note" v-for="(note, index) in notes" :class="[{full: !grid}, note.selected]" :key="index">
-
       <div class="note-header" :class="{full: !grid}">
-
         <!-- Changed title -->
         <rewriteVal
           v-if="note.titleEdit"
           :editing='editing'
           @close="resetValues(note, 'title')"/>
-
-        <p class="note-header" v-else @dblclick="[changeVal(note.title, index), editing.values.title = true, note.titleEdit = true]">{{ note.title }}</p>
-        <p class="note-header_cursor" style="cursor: pointer;" @click="cancelNote(index)">x</p>
+        <p class="note-header note-header__item" v-else @click="[changeVal(note.title, index), editing.values.title = true, note.titleEdit = true]">{{ note.title }}</p>
+        <div class="note-header__icons">
+          <p class="note-header__edit"><img src="@/assets/edit.png" alt="edit.png" style="max-width: 20px;"></p>
+          <p class="note-header__cursor" style="cursor: pointer;" @click="cancelNote(index)">x</p>
+        </div>
       </div>
 
       <div class="note-body">
@@ -20,8 +20,7 @@
           v-if="note.descrEdit"
           :editing='editing'
           @close="resetValues(note, 'descr')"/>
-
-        <p v-else @dblclick="[changeVal(note.descr, index), editing.values.descr = true, note.descrEdit = true]">{{ note.descr }}</p>
+        <p class="note-body__item" v-else @click="[changeVal(note.descr, index), editing.values.descr = true, note.descrEdit = true]">{{ note.descr }}</p>
         <span>{{ note.date }}</span>
 
       </div>
@@ -102,11 +101,24 @@ export default {
     text-align: center;
   }
 }
+.note:hover {
+    .note-header__item, .note-body__item {
+      background: #efefff;
+    }
+}
 .note-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  &__cursor, &__edit {
+    padding: 10px;
+  }
   h1 {
     font-size: 32px;
   }
@@ -135,6 +147,7 @@ export default {
       }
     }
   }
+
 }
 .note-body {
   p {
@@ -145,7 +158,9 @@ export default {
     color: #999999;
   }
 }
-
+.note-header__item, .note-body__item {
+  cursor: pointer;
+}
 .base {
   background-color: #fff;
 }
